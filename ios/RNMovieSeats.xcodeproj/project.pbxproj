@@ -1,0 +1,453 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		B3E7B58A1CC2AC0600A0062D /* RNMovieSeats.m in Sources */ = {isa = PBXBuildFile; fileRef = B3E7B5891CC2AC0600A0062D /* RNMovieSeats.m */; };
+		F918F4E11F73A12E006C9AE8 /* MSFileUitiles.m in Sources */ = {isa = PBXBuildFile; fileRef = F918F4E01F73A12E006C9AE8 /* MSFileUitiles.m */; };
+		F972434E1F7251F9008059C4 /* ZFSeatModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F97243131F7251F9008059C4 /* ZFSeatModel.m */; };
+		F972434F1F7251F9008059C4 /* ZFSeatsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F97243151F7251F9008059C4 /* ZFSeatsModel.m */; };
+		F97243501F7251F9008059C4 /* ZFAppLogoView.m in Sources */ = {isa = PBXBuildFile; fileRef = F97243181F7251F9008059C4 /* ZFAppLogoView.m */; };
+		F97243511F7251F9008059C4 /* ZFCenterLineView.m in Sources */ = {isa = PBXBuildFile; fileRef = F972431A1F7251F9008059C4 /* ZFCenterLineView.m */; };
+		F97243521F7251F9008059C4 /* ZFHallLogoView.m in Sources */ = {isa = PBXBuildFile; fileRef = F972431C1F7251F9008059C4 /* ZFHallLogoView.m */; };
+		F97243531F7251F9008059C4 /* ZFIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = F972431E1F7251F9008059C4 /* ZFIndicatorView.m */; };
+		F97243541F7251F9008059C4 /* ZFRowIndexView.m in Sources */ = {isa = PBXBuildFile; fileRef = F97243201F7251F9008059C4 /* ZFRowIndexView.m */; };
+		F97243551F7251F9008059C4 /* ZFSeatButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F97243221F7251F9008059C4 /* ZFSeatButton.m */; };
+		F97243561F7251F9008059C4 /* ZFSeatSelectionTool.m in Sources */ = {isa = PBXBuildFile; fileRef = F97243251F7251F9008059C4 /* ZFSeatSelectionTool.m */; };
+		F97243571F7251F9008059C4 /* ZFSeatSelectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = F97243271F7251F9008059C4 /* ZFSeatSelectionView.m */; };
+		F97243581F7251F9008059C4 /* ZFSeatsView.m in Sources */ = {isa = PBXBuildFile; fileRef = F97243291F7251F9008059C4 /* ZFSeatsView.m */; };
+		F972435A1F7251F9008059C4 /* MJExtensionConst.m in Sources */ = {isa = PBXBuildFile; fileRef = F97243311F7251F9008059C4 /* MJExtensionConst.m */; };
+		F972435B1F7251F9008059C4 /* MJFoundation.m in Sources */ = {isa = PBXBuildFile; fileRef = F97243331F7251F9008059C4 /* MJFoundation.m */; };
+		F972435C1F7251F9008059C4 /* MJProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = F97243351F7251F9008059C4 /* MJProperty.m */; };
+		F972435D1F7251F9008059C4 /* MJPropertyKey.m in Sources */ = {isa = PBXBuildFile; fileRef = F97243371F7251F9008059C4 /* MJPropertyKey.m */; };
+		F972435E1F7251F9008059C4 /* MJPropertyType.m in Sources */ = {isa = PBXBuildFile; fileRef = F97243391F7251F9008059C4 /* MJPropertyType.m */; };
+		F972435F1F7251F9008059C4 /* NSObject+MJClass.m in Sources */ = {isa = PBXBuildFile; fileRef = F972433B1F7251F9008059C4 /* NSObject+MJClass.m */; };
+		F97243601F7251F9008059C4 /* NSObject+MJCoding.m in Sources */ = {isa = PBXBuildFile; fileRef = F972433D1F7251F9008059C4 /* NSObject+MJCoding.m */; };
+		F97243611F7251F9008059C4 /* NSObject+MJKeyValue.m in Sources */ = {isa = PBXBuildFile; fileRef = F972433F1F7251F9008059C4 /* NSObject+MJKeyValue.m */; };
+		F97243621F7251F9008059C4 /* NSObject+MJProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = F97243411F7251F9008059C4 /* NSObject+MJProperty.m */; };
+		F97243631F7251F9008059C4 /* NSString+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = F97243431F7251F9008059C4 /* NSString+MJExtension.m */; };
+		F97243641F7251F9008059C4 /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = F972434B1F7251F9008059C4 /* UIView+Extension.m */; };
+		F972439A1F725F44008059C4 /* RNMovieSeatsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F97243991F725F44008059C4 /* RNMovieSeatsManager.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		58B511D91A9E6C8500147676 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		134814201AA4EA6300B7C361 /* libRNMovieSeats.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRNMovieSeats.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3E7B5881CC2AC0600A0062D /* RNMovieSeats.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNMovieSeats.h; sourceTree = "<group>"; };
+		B3E7B5891CC2AC0600A0062D /* RNMovieSeats.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNMovieSeats.m; sourceTree = "<group>"; };
+		F918F4DF1F73A12E006C9AE8 /* MSFileUitiles.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSFileUitiles.h; sourceTree = "<group>"; };
+		F918F4E01F73A12E006C9AE8 /* MSFileUitiles.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSFileUitiles.m; sourceTree = "<group>"; };
+		F97243121F7251F9008059C4 /* ZFSeatModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFSeatModel.h; sourceTree = "<group>"; };
+		F97243131F7251F9008059C4 /* ZFSeatModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFSeatModel.m; sourceTree = "<group>"; };
+		F97243141F7251F9008059C4 /* ZFSeatsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFSeatsModel.h; sourceTree = "<group>"; };
+		F97243151F7251F9008059C4 /* ZFSeatsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFSeatsModel.m; sourceTree = "<group>"; };
+		F97243171F7251F9008059C4 /* ZFAppLogoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFAppLogoView.h; sourceTree = "<group>"; };
+		F97243181F7251F9008059C4 /* ZFAppLogoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFAppLogoView.m; sourceTree = "<group>"; };
+		F97243191F7251F9008059C4 /* ZFCenterLineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFCenterLineView.h; sourceTree = "<group>"; };
+		F972431A1F7251F9008059C4 /* ZFCenterLineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFCenterLineView.m; sourceTree = "<group>"; };
+		F972431B1F7251F9008059C4 /* ZFHallLogoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFHallLogoView.h; sourceTree = "<group>"; };
+		F972431C1F7251F9008059C4 /* ZFHallLogoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFHallLogoView.m; sourceTree = "<group>"; };
+		F972431D1F7251F9008059C4 /* ZFIndicatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFIndicatorView.h; sourceTree = "<group>"; };
+		F972431E1F7251F9008059C4 /* ZFIndicatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFIndicatorView.m; sourceTree = "<group>"; };
+		F972431F1F7251F9008059C4 /* ZFRowIndexView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFRowIndexView.h; sourceTree = "<group>"; };
+		F97243201F7251F9008059C4 /* ZFRowIndexView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFRowIndexView.m; sourceTree = "<group>"; };
+		F97243211F7251F9008059C4 /* ZFSeatButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFSeatButton.h; sourceTree = "<group>"; };
+		F97243221F7251F9008059C4 /* ZFSeatButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFSeatButton.m; sourceTree = "<group>"; };
+		F97243231F7251F9008059C4 /* ZFSeatSelectionConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFSeatSelectionConfig.h; sourceTree = "<group>"; };
+		F97243241F7251F9008059C4 /* ZFSeatSelectionTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFSeatSelectionTool.h; sourceTree = "<group>"; };
+		F97243251F7251F9008059C4 /* ZFSeatSelectionTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFSeatSelectionTool.m; sourceTree = "<group>"; };
+		F97243261F7251F9008059C4 /* ZFSeatSelectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFSeatSelectionView.h; sourceTree = "<group>"; };
+		F97243271F7251F9008059C4 /* ZFSeatSelectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFSeatSelectionView.m; sourceTree = "<group>"; };
+		F97243281F7251F9008059C4 /* ZFSeatsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFSeatsView.h; sourceTree = "<group>"; };
+		F97243291F7251F9008059C4 /* ZFSeatsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFSeatsView.m; sourceTree = "<group>"; };
+		F972432E1F7251F9008059C4 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F972432F1F7251F9008059C4 /* MJExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJExtension.h; sourceTree = "<group>"; };
+		F97243301F7251F9008059C4 /* MJExtensionConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJExtensionConst.h; sourceTree = "<group>"; };
+		F97243311F7251F9008059C4 /* MJExtensionConst.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJExtensionConst.m; sourceTree = "<group>"; };
+		F97243321F7251F9008059C4 /* MJFoundation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJFoundation.h; sourceTree = "<group>"; };
+		F97243331F7251F9008059C4 /* MJFoundation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJFoundation.m; sourceTree = "<group>"; };
+		F97243341F7251F9008059C4 /* MJProperty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJProperty.h; sourceTree = "<group>"; };
+		F97243351F7251F9008059C4 /* MJProperty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJProperty.m; sourceTree = "<group>"; };
+		F97243361F7251F9008059C4 /* MJPropertyKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJPropertyKey.h; sourceTree = "<group>"; };
+		F97243371F7251F9008059C4 /* MJPropertyKey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJPropertyKey.m; sourceTree = "<group>"; };
+		F97243381F7251F9008059C4 /* MJPropertyType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJPropertyType.h; sourceTree = "<group>"; };
+		F97243391F7251F9008059C4 /* MJPropertyType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJPropertyType.m; sourceTree = "<group>"; };
+		F972433A1F7251F9008059C4 /* NSObject+MJClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+MJClass.h"; sourceTree = "<group>"; };
+		F972433B1F7251F9008059C4 /* NSObject+MJClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+MJClass.m"; sourceTree = "<group>"; };
+		F972433C1F7251F9008059C4 /* NSObject+MJCoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+MJCoding.h"; sourceTree = "<group>"; };
+		F972433D1F7251F9008059C4 /* NSObject+MJCoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+MJCoding.m"; sourceTree = "<group>"; };
+		F972433E1F7251F9008059C4 /* NSObject+MJKeyValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+MJKeyValue.h"; sourceTree = "<group>"; };
+		F972433F1F7251F9008059C4 /* NSObject+MJKeyValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+MJKeyValue.m"; sourceTree = "<group>"; };
+		F97243401F7251F9008059C4 /* NSObject+MJProperty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+MJProperty.h"; sourceTree = "<group>"; };
+		F97243411F7251F9008059C4 /* NSObject+MJProperty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+MJProperty.m"; sourceTree = "<group>"; };
+		F97243421F7251F9008059C4 /* NSString+MJExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MJExtension.h"; sourceTree = "<group>"; };
+		F97243431F7251F9008059C4 /* NSString+MJExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MJExtension.m"; sourceTree = "<group>"; };
+		F972434A1F7251F9008059C4 /* UIView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Extension.h"; sourceTree = "<group>"; };
+		F972434B1F7251F9008059C4 /* UIView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Extension.m"; sourceTree = "<group>"; };
+		F97243981F725F44008059C4 /* RNMovieSeatsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNMovieSeatsManager.h; sourceTree = SOURCE_ROOT; };
+		F97243991F725F44008059C4 /* RNMovieSeatsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNMovieSeatsManager.m; sourceTree = SOURCE_ROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		58B511D81A9E6C8500147676 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		134814211AA4EA7D00B7C361 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				134814201AA4EA6300B7C361 /* libRNMovieSeats.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		58B511D21A9E6C8500147676 = {
+			isa = PBXGroup;
+			children = (
+				F97243091F7251F9008059C4 /* Class */,
+				F972432A1F7251F9008059C4 /* Lib */,
+				F97243981F725F44008059C4 /* RNMovieSeatsManager.h */,
+				F97243991F725F44008059C4 /* RNMovieSeatsManager.m */,
+				F972434A1F7251F9008059C4 /* UIView+Extension.h */,
+				F972434B1F7251F9008059C4 /* UIView+Extension.m */,
+				B3E7B5881CC2AC0600A0062D /* RNMovieSeats.h */,
+				B3E7B5891CC2AC0600A0062D /* RNMovieSeats.m */,
+				134814211AA4EA7D00B7C361 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		F97243091F7251F9008059C4 /* Class */ = {
+			isa = PBXGroup;
+			children = (
+				F97243111F7251F9008059C4 /* Model */,
+				F97243161F7251F9008059C4 /* View */,
+			);
+			path = Class;
+			sourceTree = "<group>";
+		};
+		F97243111F7251F9008059C4 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				F97243121F7251F9008059C4 /* ZFSeatModel.h */,
+				F97243131F7251F9008059C4 /* ZFSeatModel.m */,
+				F97243141F7251F9008059C4 /* ZFSeatsModel.h */,
+				F97243151F7251F9008059C4 /* ZFSeatsModel.m */,
+				F918F4DF1F73A12E006C9AE8 /* MSFileUitiles.h */,
+				F918F4E01F73A12E006C9AE8 /* MSFileUitiles.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		F97243161F7251F9008059C4 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				F97243171F7251F9008059C4 /* ZFAppLogoView.h */,
+				F97243181F7251F9008059C4 /* ZFAppLogoView.m */,
+				F97243191F7251F9008059C4 /* ZFCenterLineView.h */,
+				F972431A1F7251F9008059C4 /* ZFCenterLineView.m */,
+				F972431B1F7251F9008059C4 /* ZFHallLogoView.h */,
+				F972431C1F7251F9008059C4 /* ZFHallLogoView.m */,
+				F972431D1F7251F9008059C4 /* ZFIndicatorView.h */,
+				F972431E1F7251F9008059C4 /* ZFIndicatorView.m */,
+				F972431F1F7251F9008059C4 /* ZFRowIndexView.h */,
+				F97243201F7251F9008059C4 /* ZFRowIndexView.m */,
+				F97243211F7251F9008059C4 /* ZFSeatButton.h */,
+				F97243221F7251F9008059C4 /* ZFSeatButton.m */,
+				F97243231F7251F9008059C4 /* ZFSeatSelectionConfig.h */,
+				F97243241F7251F9008059C4 /* ZFSeatSelectionTool.h */,
+				F97243251F7251F9008059C4 /* ZFSeatSelectionTool.m */,
+				F97243261F7251F9008059C4 /* ZFSeatSelectionView.h */,
+				F97243271F7251F9008059C4 /* ZFSeatSelectionView.m */,
+				F97243281F7251F9008059C4 /* ZFSeatsView.h */,
+				F97243291F7251F9008059C4 /* ZFSeatsView.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		F972432A1F7251F9008059C4 /* Lib */ = {
+			isa = PBXGroup;
+			children = (
+				F972432D1F7251F9008059C4 /* MJExtension */,
+			);
+			path = Lib;
+			sourceTree = "<group>";
+		};
+		F972432D1F7251F9008059C4 /* MJExtension */ = {
+			isa = PBXGroup;
+			children = (
+				F972432E1F7251F9008059C4 /* Info.plist */,
+				F972432F1F7251F9008059C4 /* MJExtension.h */,
+				F97243301F7251F9008059C4 /* MJExtensionConst.h */,
+				F97243311F7251F9008059C4 /* MJExtensionConst.m */,
+				F97243321F7251F9008059C4 /* MJFoundation.h */,
+				F97243331F7251F9008059C4 /* MJFoundation.m */,
+				F97243341F7251F9008059C4 /* MJProperty.h */,
+				F97243351F7251F9008059C4 /* MJProperty.m */,
+				F97243361F7251F9008059C4 /* MJPropertyKey.h */,
+				F97243371F7251F9008059C4 /* MJPropertyKey.m */,
+				F97243381F7251F9008059C4 /* MJPropertyType.h */,
+				F97243391F7251F9008059C4 /* MJPropertyType.m */,
+				F972433A1F7251F9008059C4 /* NSObject+MJClass.h */,
+				F972433B1F7251F9008059C4 /* NSObject+MJClass.m */,
+				F972433C1F7251F9008059C4 /* NSObject+MJCoding.h */,
+				F972433D1F7251F9008059C4 /* NSObject+MJCoding.m */,
+				F972433E1F7251F9008059C4 /* NSObject+MJKeyValue.h */,
+				F972433F1F7251F9008059C4 /* NSObject+MJKeyValue.m */,
+				F97243401F7251F9008059C4 /* NSObject+MJProperty.h */,
+				F97243411F7251F9008059C4 /* NSObject+MJProperty.m */,
+				F97243421F7251F9008059C4 /* NSString+MJExtension.h */,
+				F97243431F7251F9008059C4 /* NSString+MJExtension.m */,
+			);
+			path = MJExtension;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		58B511DA1A9E6C8500147676 /* RNMovieSeats */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 58B511EF1A9E6C8500147676 /* Build configuration list for PBXNativeTarget "RNMovieSeats" */;
+			buildPhases = (
+				58B511D71A9E6C8500147676 /* Sources */,
+				58B511D81A9E6C8500147676 /* Frameworks */,
+				58B511D91A9E6C8500147676 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RNMovieSeats;
+			productName = RCTDataManager;
+			productReference = 134814201AA4EA6300B7C361 /* libRNMovieSeats.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		58B511D31A9E6C8500147676 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0830;
+				ORGANIZATIONNAME = Facebook;
+				TargetAttributes = {
+					58B511DA1A9E6C8500147676 = {
+						CreatedOnToolsVersion = 6.1.1;
+					};
+				};
+			};
+			buildConfigurationList = 58B511D61A9E6C8500147676 /* Build configuration list for PBXProject "RNMovieSeats" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 58B511D21A9E6C8500147676;
+			productRefGroup = 58B511D21A9E6C8500147676;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				58B511DA1A9E6C8500147676 /* RNMovieSeats */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		58B511D71A9E6C8500147676 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F97243541F7251F9008059C4 /* ZFRowIndexView.m in Sources */,
+				F97243611F7251F9008059C4 /* NSObject+MJKeyValue.m in Sources */,
+				F97243641F7251F9008059C4 /* UIView+Extension.m in Sources */,
+				F97243581F7251F9008059C4 /* ZFSeatsView.m in Sources */,
+				F97243561F7251F9008059C4 /* ZFSeatSelectionTool.m in Sources */,
+				F972439A1F725F44008059C4 /* RNMovieSeatsManager.m in Sources */,
+				F97243521F7251F9008059C4 /* ZFHallLogoView.m in Sources */,
+				F97243511F7251F9008059C4 /* ZFCenterLineView.m in Sources */,
+				F972435E1F7251F9008059C4 /* MJPropertyType.m in Sources */,
+				F97243621F7251F9008059C4 /* NSObject+MJProperty.m in Sources */,
+				F97243601F7251F9008059C4 /* NSObject+MJCoding.m in Sources */,
+				F97243551F7251F9008059C4 /* ZFSeatButton.m in Sources */,
+				F972435D1F7251F9008059C4 /* MJPropertyKey.m in Sources */,
+				F972435A1F7251F9008059C4 /* MJExtensionConst.m in Sources */,
+				F97243501F7251F9008059C4 /* ZFAppLogoView.m in Sources */,
+				F972435F1F7251F9008059C4 /* NSObject+MJClass.m in Sources */,
+				B3E7B58A1CC2AC0600A0062D /* RNMovieSeats.m in Sources */,
+				F97243571F7251F9008059C4 /* ZFSeatSelectionView.m in Sources */,
+				F972434F1F7251F9008059C4 /* ZFSeatsModel.m in Sources */,
+				F972435C1F7251F9008059C4 /* MJProperty.m in Sources */,
+				F918F4E11F73A12E006C9AE8 /* MSFileUitiles.m in Sources */,
+				F972434E1F7251F9008059C4 /* ZFSeatModel.m in Sources */,
+				F97243531F7251F9008059C4 /* ZFIndicatorView.m in Sources */,
+				F97243631F7251F9008059C4 /* NSString+MJExtension.m in Sources */,
+				F972435B1F7251F9008059C4 /* MJFoundation.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		58B511ED1A9E6C8500147676 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		58B511EE1A9E6C8500147676 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		58B511F01A9E6C8500147676 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(SRCROOT)/../../React/**",
+					"$(SRCROOT)/../react-native/React/**",
+					"$(SRCROOT)/../node_modules/react-native/React/**",
+					"/Users/ashoka/Desktop/workspace/ios/MovieSeats/node_modules/react-native/React/**",
+				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = RNMovieSeats;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		58B511F11A9E6C8500147676 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(SRCROOT)/../../React/**",
+					"$(SRCROOT)/../react-native/React/**",
+					"$(SRCROOT)/../node_modules/react-native/React/**",
+					"/Users/ashoka/Desktop/workspace/ios/MovieSeats/node_modules/react-native/React/**",
+				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = RNMovieSeats;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		58B511D61A9E6C8500147676 /* Build configuration list for PBXProject "RNMovieSeats" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				58B511ED1A9E6C8500147676 /* Debug */,
+				58B511EE1A9E6C8500147676 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		58B511EF1A9E6C8500147676 /* Build configuration list for PBXNativeTarget "RNMovieSeats" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				58B511F01A9E6C8500147676 /* Debug */,
+				58B511F11A9E6C8500147676 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 58B511D31A9E6C8500147676 /* Project object */;
+}
