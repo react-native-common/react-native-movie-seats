@@ -43,7 +43,8 @@ MovieSeats.propTypes = {
     select: PropTypes.func,
     unselect: PropTypes.func,
     error: PropTypes.func,
-    maxSelectedSeatsCount: PropTypes.number
+    maxSelectedSeatsCount: PropTypes.number,
+    selectedSeats: PropTypes.array,
 }
 
 MovieSeats.defaultProps = {
