@@ -22,7 +22,7 @@
 
 
 
-#define  ZFMaxSelectedSeatsCount 4 //限制最大选座数量
+#define  ZFMaxSelectedSeatsCount 4  //限制最大选座数量
 #define  ZFExceededMaximumError @"选择座位已达到上限"//提示选择座位超过要求的上限
 
 #define ZFImgScreenBg  @"screenBg"    //影厅图标
@@ -33,3 +33,13 @@
 #define ZFImgSold @"sold"
 #define ZFImgXuanzhong @"xuanzhong"
 #define ZFImgYishou @"yishou"
+
+typedef NS_ENUM(NSUInteger, MSErrorCode) {
+    kExceededMaximun=140000
+};
+
+typedef NS_ENUM(NSUInteger, ActionType) {
+    kSelect,
+    kUnSelect,
+    kError,
+};

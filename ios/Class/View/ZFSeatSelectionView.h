@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "ZFSeatButton.h"
+#import "ZFSeatSelectionConfig.h"
+
 @interface ZFSeatSelectionView : UIView
 
 /**frame 初始化必需设置你的frame  seatsArray座位数组    hallName影厅名称   actionBlock按钮点击回调－>传回就是选中的按钮数组和全部可选按钮*/
@@ -15,6 +17,11 @@
 -(instancetype)initWithFrame:(CGRect)frame
                   SeatsArray:(NSMutableArray *)seatsArray
                     HallName:(NSString *)hallName
-          seatBtnActionBlock:(void(^)(NSMutableArray *selecetedSeats,NSMutableDictionary *allAvailableSeats,NSString *errorStr))actionBlock;
+          seatBtnActionBlock:(void(^)(NSString *, NSString *, ActionType))actionBlock;
+
+/**
+ 限制最大选座数量
+*/
+@property (nonatomic, assign) NSInteger maxSelectedSeatsCount;
 
 @end

@@ -10,7 +10,7 @@
     return self;
 }
 
-- (void)setupViewWidth:(CGFloat)width height:(CGFloat)height {
+- (void)setupView {
     if(!_selectSeatsView) {
         NSBundle *bundle = [NSBundle bundleWithPath:[[NSBundle mainBundle] pathForResource:@"movie-seats" ofType:@"bundle"]];
         NSString *path = [bundle pathForResource:[NSString stringWithFormat:@"seats %zd.plist",arc4random_uniform(5)] ofType:nil];
@@ -25,13 +25,23 @@
             ZFSeatsModel *seatModel = [ZFSeatsModel mj_objectWithKeyValues:obj];
             [seatsModelArray addObject:seatModel];
         }];
-        _selectSeatsView = [[ZFSeatSelectionView alloc] initWithFrame:CGRectMake(0, 0, width, height) SeatsArray:seatsModelArray HallName:@"hello" seatBtnActionBlock:^(NSMutableArray *selecetedSeats, NSMutableDictionary *allAvailableSeats, NSString *errorStr) {
-            NSLog(@"=====%zd个选中按钮===========%zd个可选座位==========errorStr====%@=========",selecetedSeats.count,allAvailableSeats.count,errorStr);
-            if (errorStr) {
-                //错误信息
-                NSLog(@"error.....%@", errorStr);
+        __weak typeof(self) weakSelf = self;
+        _selectSeatsView = [[ZFSeatSelectionView alloc] initWithFrame:CGRectMake(0, 0, self.rctWidth, self.rctHeight) SeatsArray:seatsModelArray HallName:@"hello" seatBtnActionBlock:^(NSString *row, NSString *column, ActionType actionType) {
+            NSDictionary *types = @{
+                                    @(kSelect).stringValue: @"select",
+                                    @(kUnSelect).stringValue: @"unselect",
+                                    @(kError).stringValue: @"error"
+                                    };
+            NSString *type = types[@(actionType).stringValue];
+            if (actionType == kError) {
+                
             }
+            weakSelf.onChange(@{
+                                @"type": type,
+                                @"data": @{@"row":row, @"column":column}
+                                });
         }];
+        _selectSeatsView.maxSelectedSeatsCount = self.maxSelectedSeatsCount;
         [self addSubview:_selectSeatsView];
     }
 }

@@ -13,6 +13,14 @@
 
 @implementation RNMovieSeatsManager
 
+RCT_EXPORT_MODULE()
+
+RCT_EXPORT_VIEW_PROPERTY(onChange, RCTBubblingEventBlock)
+
+RCT_CUSTOM_VIEW_PROPERTY(maxSelectedSeatsCount, NSNumber, RNMovieSeats) {
+    [view setMaxSelectedSeatsCount:[json integerValue]];
+}
+
 RCT_CUSTOM_VIEW_PROPERTY(width, NSNumber, RNMovieSeats) {
     [view setRctWidth:[json floatValue]];
 }
@@ -21,7 +29,10 @@ RCT_CUSTOM_VIEW_PROPERTY(height, NSNumber, RNMovieSeats) {
     [view setRctHeight:[json floatValue]];
 }
 
-RCT_EXPORT_MODULE()
+RCT_CUSTOM_VIEW_PROPERTY(seatInfos, NSDictionary, RNMovieSeats) {
+//    [view setSeatsArray:json];
+    NSLog(@"seatInfos: %@", json);
+}
 
 - (UIView *)view
 {
@@ -34,7 +45,7 @@ RCT_EXPORT_METHOD(setupViews:(nonnull NSNumber *)reactTag) {
         if (![view isKindOfClass:[RNMovieSeats class]]) {
             RCTLogError(@"Invalid view returned from registry, expecting RNMovieSeats, got: %@", view);
         } else {
-            [view setupViewWidth:view.rctWidth height:view.rctHeight];
+            [view setupView];
         }
     }];
 }

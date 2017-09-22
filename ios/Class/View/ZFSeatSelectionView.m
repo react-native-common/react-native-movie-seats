@@ -16,7 +16,6 @@
 #import "ZFAppLogoView.h"
 #import "UIView+Extension.h"
 #import "ZFSeatsView.h"
-#import "ZFSeatSelectionConfig.h"
 
 @interface ZFSeatSelectionView ()<UIScrollViewDelegate>
 /**seatScrollView*/
@@ -36,7 +35,7 @@
 /**指示框*/
 @property (nonatomic, weak) ZFIndicatorView *indicator;
 
-@property (nonatomic,copy) void (^actionBlock)(NSMutableArray *, NSMutableDictionary *, NSString *);
+@property (nonatomic,copy) void (^actionBlock)(NSString *row, NSString *column, ActionType);
 
 @end
 
@@ -46,12 +45,13 @@
 -(instancetype)initWithFrame:(CGRect)frame
                   SeatsArray:(NSMutableArray *)seatsArray
                     HallName:(NSString *)hallName
-          seatBtnActionBlock:(void (^)(NSMutableArray *, NSMutableDictionary *, NSString *))actionBlock{
+          seatBtnActionBlock:(void (^)(NSString *, NSString *, ActionType))actionBlock{
     
     if (self = [super initWithFrame:frame]) {//初始化操作
         self.backgroundColor = [UIColor colorWithRed:245.0/255.0
                                                green:245.0/255.0
                                                 blue:245.0/255.0 alpha:1];
+        self.maxSelectedSeatsCount = ZFMaxSelectedSeatsCount;
         self.actionBlock = actionBlock;
         [self initScrollView];
         [self initappLogo];
@@ -151,19 +151,21 @@
         NSString *errorStr = nil;
         if (seatBtn.selected) {
             [weakSelf.selecetedSeats addObject:seatBtn];
-            if (weakSelf.selecetedSeats.count > ZFMaxSelectedSeatsCount) {
+            if (weakSelf.selecetedSeats.count > weakSelf.maxSelectedSeatsCount) {
                 seatBtn.selected = !seatBtn.selected;
                 [weakSelf.selecetedSeats removeObject:seatBtn];
                 errorStr = ZFExceededMaximumError;
+                weakSelf.actionBlock(seatBtn.seatsmodel.rowId, seatBtn.seatmodel.columnId, kError);
+            } else {
+                weakSelf.actionBlock(seatBtn.seatsmodel.rowId, seatBtn.seatmodel.columnId, kSelect);
             }
         }else{
             if ([weakSelf.selecetedSeats containsObject:seatBtn]) {
                 [weakSelf.selecetedSeats removeObject:seatBtn];
-                if (weakSelf.actionBlock) weakSelf.actionBlock(weakSelf.selecetedSeats,allAvailableSeats,errorStr);
+                if (weakSelf.actionBlock) weakSelf.actionBlock(seatBtn.seatsmodel.rowId, seatBtn.seatmodel.columnId, kUnSelect);
                 return ;
             }
         }
-        if (weakSelf.actionBlock) weakSelf.actionBlock(weakSelf.selecetedSeats,allAvailableSeats,errorStr);
         if (weakSelf.seatScrollView.maximumZoomScale - weakSelf.seatScrollView.zoomScale < 0.1) return;//设置座位放大
         CGFloat maximumZoomScale = weakSelf.seatScrollView.maximumZoomScale;
         CGRect zoomRect = [weakSelf _zoomRectInView:weakSelf.seatScrollView forScale:maximumZoomScale withCenter:CGPointMake(seatBtn.centerX, seatBtn.centerY)];
