@@ -10,6 +10,9 @@
 
 #import "ZFSeatSelectionConfig.h"
 #import "MSFileUitiles.h"
+#import "ZFCenterLineView.h"
+#import "ASCenterLineView.h"
+#import "UIView+Extension.h"
 
 @interface ZFSeatsView ()
 
@@ -58,6 +61,8 @@
         self.seatViewHeight = [seatsArray count] * seatBtnH;
         //初始化座位
         [self initSeatBtns:seatsArray];
+        [self initHorizontalCenterLine];
+        [self initVerticalCenterLine];
     }
     return self;
 }
@@ -89,6 +94,26 @@
             
         }
     }];
+}
+
+-(void)initVerticalCenterLine{
+    ASCenterLineView *centerLine = [[ASCenterLineView alloc] init];
+    centerLine.backgroundColor = [UIColor clearColor];
+    centerLine.width = 1;
+    centerLine.height = self.seatViewHeight;
+    centerLine.centerX = self.seatViewWidth/2;
+    centerLine.y = 0;
+    [self addSubview:centerLine];
+}
+
+- (void)initHorizontalCenterLine {
+    ASCenterLineView *centerLine = [[ASCenterLineView alloc] initWithHorizontal:YES];
+    centerLine.backgroundColor = [UIColor clearColor];
+    centerLine.height = 1;
+    centerLine.width = self.seatViewWidth;
+    centerLine.centerY = self.seatViewHeight/2;
+    centerLine.x = 0;
+    [self addSubview:centerLine];
 }
 
 -(void)layoutSubviews{
