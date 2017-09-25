@@ -140,5 +140,25 @@
    if (self.actionBlock) self.actionBlock(seatbtn,self.allAvailableSeats);
 }
 
+- (void)cancelSelectAtRow:(NSString *)row column:(NSString *)column {
+    [self setRow:row column:column selected:NO];
+}
+
+- (void)setRow:(NSString *)row column:(NSString *)column selected:(BOOL)select {
+    for (NSString *key in _allAvailableSeats) {
+        ZFSeatButton *seatBtn = [_allAvailableSeats objectForKey:key];
+        if ([seatBtn.seatsmodel.rowId isEqualToString:row] && [seatBtn.seatmodel.columnId isEqualToString:column]) {
+            seatBtn.selected = select;
+            if (seatBtn.selected) {
+                seatBtn.seatmodel.st = @"LK";
+            } else {
+                seatBtn.seatmodel.st = @"N";
+            }
+            if (self.actionBlock) self.actionBlock(seatBtn, self.allAvailableSeats);
+            break;
+        }
+    }
+}
+
 
 @end
