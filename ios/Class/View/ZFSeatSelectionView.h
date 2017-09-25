@@ -27,4 +27,8 @@
 /**已经选择的按钮数组*/
 @property (nonatomic, strong) NSMutableArray *selecetedSeats;
 
+- (void)clearAllSelectedSeats;
+
+- (void)setRow:(NSString *)row column:(NSString *)column selected:(BOOL)select;
+
 @end

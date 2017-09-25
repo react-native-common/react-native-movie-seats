@@ -15,8 +15,12 @@
 
 @property (nonatomic, assign) float rctWidth;
 @property (nonatomic, assign) float rctHeight;
-@property (nonatomic, strong) NSArray *seatsArray;
+@property (nonatomic, strong) NSMutableArray *seatsArray;
 @property (nonatomic, copy) RCTBubblingEventBlock onChange;
+@property (nonatomic, strong) NSArray *selectedSeats;
+
+/**影厅名称*/
+@property (nonatomic, strong) NSString *hallName;
 
 /**
  限制最大选座数量

@@ -23,4 +23,14 @@
 -(BOOL)isSeatAvailable{
     return [self.seatmodel.st isEqualToString:@"N"];
 }
+
+- (void)setSelected:(BOOL)selected {
+    [super setSelected:selected];
+    if (selected) {
+        self.seatmodel.st = @"LK";
+    } else {
+        self.seatmodel.st = @"N";
+    }
+}
+
 @end

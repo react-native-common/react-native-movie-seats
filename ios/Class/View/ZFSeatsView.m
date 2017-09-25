@@ -43,7 +43,7 @@
         
         NSUInteger cloCount = [seatsModel.columns count];
         
-        if (cloCount % 2) cloCount += 1;//奇数列数加1 防止中线压住座位
+//        if (cloCount % 2) cloCount += 1;//奇数列数加1 防止中线压住座位
         
         CGFloat seatViewW = maxW - 2 * ZFseastsRowMargin;
         
@@ -62,7 +62,7 @@
         //初始化座位
         [self initSeatBtns:seatsArray];
         [self initHorizontalCenterLine:seatsArray];
-        [self initVerticalCenterLine];
+        [self initVerticalCenterLine:seatsArray];
     }
     return self;
 }
@@ -96,12 +96,14 @@
     }];
 }
 
--(void)initVerticalCenterLine{
+-(void)initVerticalCenterLine:(NSArray *)seatsArray{
+    ZFSeatsModel *seatsModel = seatsArray.firstObject;
+    NSUInteger cloCount = [seatsModel.columns count];
     ASCenterLineView *centerLine = [[ASCenterLineView alloc] init];
     centerLine.backgroundColor = [UIColor clearColor];
     centerLine.width = 1;
     centerLine.height = self.seatViewHeight;
-    centerLine.centerX = self.seatViewWidth/2;
+    centerLine.centerX = (self.seatViewWidth - ((cloCount % 2) ? self.seatBtnWidth : 0))/2;
     centerLine.y = 0;
     [self addSubview:centerLine];
 }
@@ -112,7 +114,7 @@
     centerLine.backgroundColor = [UIColor clearColor];
     centerLine.height = 1;
     centerLine.width = self.seatViewWidth;
-    centerLine.centerY = (self.seatViewHeight + ((rowCount % 2) ? self.seatBtnHeight : 0))/2;
+    centerLine.centerY = (self.seatViewHeight - ((rowCount % 2) ? self.seatBtnHeight : 0))/2;
     centerLine.x = 0;
     [self addSubview:centerLine];
 }
