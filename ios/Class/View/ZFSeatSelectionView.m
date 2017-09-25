@@ -20,8 +20,6 @@
 @interface ZFSeatSelectionView ()<UIScrollViewDelegate>
 /**seatScrollView*/
 @property (nonatomic, weak) UIScrollView *seatScrollView;
-/**已经选择的按钮数组*/
-@property (nonatomic, strong) NSMutableArray *selecetedSeats;
 /**按钮父控件*/
 @property (nonatomic, weak) ZFSeatsView *seatView;
 /**影院logo*/
@@ -147,7 +145,6 @@
     ZFSeatsView *seatView = [[ZFSeatsView alloc]initWithSeatsArray:seatsArray
                                                      maxNomarWidth:self.width
                                                 seatBtnActionBlock:^(ZFSeatButton *seatBtn, NSMutableDictionary *allAvailableSeats) {
-        [weakSelf.indicator updateMiniImageView];
         NSString *errorStr = nil;
         if (seatBtn.selected) {
             [weakSelf.selecetedSeats addObject:seatBtn];
@@ -159,7 +156,9 @@
             } else {
                 weakSelf.actionBlock(seatBtn.seatsmodel.rowId, seatBtn.seatmodel.columnId, kSelect);
             }
+            [weakSelf.indicator updateMiniImageView];
         }else{
+            [weakSelf.indicator updateMiniImageView];
             if ([weakSelf.selecetedSeats containsObject:seatBtn]) {
                 [weakSelf.selecetedSeats removeObject:seatBtn];
                 if (weakSelf.actionBlock) weakSelf.actionBlock(seatBtn.seatsmodel.rowId, seatBtn.seatmodel.columnId, kUnSelect);

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		B3E7B58A1CC2AC0600A0062D /* RNMovieSeats.m in Sources */ = {isa = PBXBuildFile; fileRef = B3E7B5891CC2AC0600A0062D /* RNMovieSeats.m */; };
 		F918F4E11F73A12E006C9AE8 /* MSFileUitiles.m in Sources */ = {isa = PBXBuildFile; fileRef = F918F4E01F73A12E006C9AE8 /* MSFileUitiles.m */; };
+		F918F5151F76546F006C9AE8 /* ASCenterLineView.m in Sources */ = {isa = PBXBuildFile; fileRef = F918F5141F76546F006C9AE8 /* ASCenterLineView.m */; };
 		F972434E1F7251F9008059C4 /* ZFSeatModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F97243131F7251F9008059C4 /* ZFSeatModel.m */; };
 		F972434F1F7251F9008059C4 /* ZFSeatsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F97243151F7251F9008059C4 /* ZFSeatsModel.m */; };
 		F97243501F7251F9008059C4 /* ZFAppLogoView.m in Sources */ = {isa = PBXBuildFile; fileRef = F97243181F7251F9008059C4 /* ZFAppLogoView.m */; };
@@ -52,6 +53,8 @@
 		B3E7B5891CC2AC0600A0062D /* RNMovieSeats.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNMovieSeats.m; sourceTree = "<group>"; };
 		F918F4DF1F73A12E006C9AE8 /* MSFileUitiles.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSFileUitiles.h; sourceTree = "<group>"; };
 		F918F4E01F73A12E006C9AE8 /* MSFileUitiles.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSFileUitiles.m; sourceTree = "<group>"; };
+		F918F5131F76546F006C9AE8 /* ASCenterLineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASCenterLineView.h; sourceTree = "<group>"; };
+		F918F5141F76546F006C9AE8 /* ASCenterLineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASCenterLineView.m; sourceTree = "<group>"; };
 		F97243121F7251F9008059C4 /* ZFSeatModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFSeatModel.h; sourceTree = "<group>"; };
 		F97243131F7251F9008059C4 /* ZFSeatModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFSeatModel.m; sourceTree = "<group>"; };
 		F97243141F7251F9008059C4 /* ZFSeatsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFSeatsModel.h; sourceTree = "<group>"; };
@@ -181,6 +184,8 @@
 				F97243271F7251F9008059C4 /* ZFSeatSelectionView.m */,
 				F97243281F7251F9008059C4 /* ZFSeatsView.h */,
 				F97243291F7251F9008059C4 /* ZFSeatsView.m */,
+				F918F5131F76546F006C9AE8 /* ASCenterLineView.h */,
+				F918F5141F76546F006C9AE8 /* ASCenterLineView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -301,6 +306,7 @@
 				F918F4E11F73A12E006C9AE8 /* MSFileUitiles.m in Sources */,
 				F972434E1F7251F9008059C4 /* ZFSeatModel.m in Sources */,
 				F97243531F7251F9008059C4 /* ZFIndicatorView.m in Sources */,
+				F918F5151F76546F006C9AE8 /* ASCenterLineView.m in Sources */,
 				F97243631F7251F9008059C4 /* NSString+MJExtension.m in Sources */,
 				F972435B1F7251F9008059C4 /* MJFoundation.m in Sources */,
 			);

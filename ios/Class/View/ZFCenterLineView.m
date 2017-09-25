@@ -60,7 +60,7 @@
     
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSetLineWidth(context, 1.0);
-    CGContextSetStrokeColorWithColor(context, [UIColor darkGrayColor].CGColor);
+    CGContextSetStrokeColorWithColor(context, [UIColor orangeColor].CGColor);
     CGFloat lengths[] = {6,3};
     CGContextSetLineDash(context, 0, lengths,2);
     CGContextMoveToPoint(context, 0, 0);

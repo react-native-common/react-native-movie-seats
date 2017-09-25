@@ -32,6 +32,14 @@ RCT_CUSTOM_VIEW_PROPERTY(height, NSNumber, RNMovieSeats) {
 RCT_CUSTOM_VIEW_PROPERTY(seatInfos, NSDictionary, RNMovieSeats) {
 //    [view setSeatsArray:json];
     NSLog(@"seatInfos: %@", json);
+    if (json) {
+        NSArray *rows = [json objectForKey:@"row"];
+        NSArray *seats = [json objectForKey:@"seat"];
+    }
+}
+
+RCT_CUSTOM_VIEW_PROPERTY(selectedSeats, NSArray, RNMovieSeats) {
+    
 }
 
 - (UIView *)view

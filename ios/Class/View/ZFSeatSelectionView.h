@@ -24,4 +24,7 @@
 */
 @property (nonatomic, assign) NSInteger maxSelectedSeatsCount;
 
+/**已经选择的按钮数组*/
+@property (nonatomic, strong) NSMutableArray *selecetedSeats;
+
 @end
