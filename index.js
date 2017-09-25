@@ -51,7 +51,11 @@ MovieSeats.defaultProps = {
     select: null,
 }
 
-var RNMovieSeats = requireNativeComponent('RNMovieSeats', MovieSeats);
+var RNMovieSeats = requireNativeComponent('RNMovieSeats', MovieSeats,{
+    nativeOnly: {
+        onChange: true
+    }
+});
 var RNMovieSeatsManager = NativeModules.RNMovieSeatsManager;
 
 module.exports = MovieSeats;
