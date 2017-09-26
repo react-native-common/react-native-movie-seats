@@ -12,7 +12,7 @@
 }
 
 - (void)setupView {
-    if(!_selectSeatsView) {
+    if(!_selectSeatsView && self.seatsArray.count > 0) {
         __weak typeof(self) weakSelf = self;
         _selectSeatsView = [[ZFSeatSelectionView alloc] initWithFrame:CGRectMake(0, 0, self.rctWidth, self.rctHeight) SeatsArray:self.seatsArray HallName:self.hallName seatBtnActionBlock:^(NSString *row, NSString *column, ActionType actionType) {
             NSDictionary *types = @{
