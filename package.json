@@ -13,8 +13,5 @@
   "license": "",
   "peerDependencies": {
     "react-native": "*"
-  },
-  "dependencies": {
-    "react-native": "^0.48.3"
   }
 }
