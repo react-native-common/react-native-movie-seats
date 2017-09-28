@@ -10,6 +10,9 @@
 
 #import "ZFSeatSelectionConfig.h"
 #import "MSFileUitiles.h"
+#import "ZFCenterLineView.h"
+#import "ASCenterLineView.h"
+#import "UIView+Extension.h"
 
 @interface ZFSeatsView ()
 
@@ -40,7 +43,7 @@
         
         NSUInteger cloCount = [seatsModel.columns count];
         
-        if (cloCount % 2) cloCount += 1;//偶数列数加1 防止中线压住座位
+//        if (cloCount % 2) cloCount += 1;//奇数列数加1 防止中线压住座位
         
         CGFloat seatViewW = maxW - 2 * ZFseastsRowMargin;
         
@@ -58,6 +61,8 @@
         self.seatViewHeight = [seatsArray count] * seatBtnH;
         //初始化座位
         [self initSeatBtns:seatsArray];
+        [self initHorizontalCenterLine:seatsArray];
+        [self initVerticalCenterLine:seatsArray];
     }
     return self;
 }
@@ -91,6 +96,29 @@
     }];
 }
 
+-(void)initVerticalCenterLine:(NSArray *)seatsArray{
+    ZFSeatsModel *seatsModel = seatsArray.firstObject;
+    NSUInteger cloCount = [seatsModel.columns count];
+    ASCenterLineView *centerLine = [[ASCenterLineView alloc] init];
+    centerLine.backgroundColor = [UIColor clearColor];
+    centerLine.width = 1;
+    centerLine.height = self.seatViewHeight;
+    centerLine.centerX = (self.seatViewWidth - ((cloCount % 2) ? self.seatBtnWidth : 0))/2;
+    centerLine.y = 0;
+    [self addSubview:centerLine];
+}
+
+- (void)initHorizontalCenterLine:(NSArray *)seatsArray {
+    NSUInteger rowCount = [seatsArray count];
+    ASCenterLineView *centerLine = [[ASCenterLineView alloc] initWithHorizontal:YES];
+    centerLine.backgroundColor = [UIColor clearColor];
+    centerLine.height = 1;
+    centerLine.width = self.seatViewWidth;
+    centerLine.centerY = (self.seatViewHeight - ((rowCount % 2) ? self.seatBtnHeight : 0))/2;
+    centerLine.x = 0;
+    [self addSubview:centerLine];
+}
+
 -(void)layoutSubviews{
     [super layoutSubviews];
 
@@ -112,6 +140,26 @@
         seatbtn.seatmodel.st = @"N";//设置为可选
     }
    if (self.actionBlock) self.actionBlock(seatbtn,self.allAvailableSeats);
+}
+
+- (void)cancelSelectAtRow:(NSString *)row column:(NSString *)column {
+    [self setRow:row column:column selected:NO];
+}
+
+- (void)setRow:(NSString *)row column:(NSString *)column selected:(BOOL)select {
+    for (NSString *key in _allAvailableSeats) {
+        ZFSeatButton *seatBtn = [_allAvailableSeats objectForKey:key];
+        if ([seatBtn.seatsmodel.rowId isEqualToString:row] && [seatBtn.seatmodel.columnId isEqualToString:column]) {
+            seatBtn.selected = select;
+            if (seatBtn.selected) {
+                seatBtn.seatmodel.st = @"LK";
+            } else {
+                seatBtn.seatmodel.st = @"N";
+            }
+            if (self.actionBlock) self.actionBlock(seatBtn, self.allAvailableSeats);
+            break;
+        }
+    }
 }
 
 

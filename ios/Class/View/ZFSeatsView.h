@@ -28,4 +28,8 @@
                     maxNomarWidth:(CGFloat)maxW
                seatBtnActionBlock:(void(^)(ZFSeatButton *seatBtn,NSMutableDictionary *allAvailableSeats))actionBlock;
 
+- (void)cancelSelectAtRow:(NSString *)row column:(NSString *)column;
+
+- (void)setRow:(NSString *)row column:(NSString *)column selected:(BOOL)select;
+
 @end

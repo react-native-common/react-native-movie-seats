@@ -20,8 +20,6 @@
 @interface ZFSeatSelectionView ()<UIScrollViewDelegate>
 /**seatScrollView*/
 @property (nonatomic, weak) UIScrollView *seatScrollView;
-/**已经选择的按钮数组*/
-@property (nonatomic, strong) NSMutableArray *selecetedSeats;
 /**按钮父控件*/
 @property (nonatomic, weak) ZFSeatsView *seatView;
 /**影院logo*/
@@ -48,17 +46,18 @@
           seatBtnActionBlock:(void (^)(NSString *, NSString *, ActionType))actionBlock{
     
     if (self = [super initWithFrame:frame]) {//初始化操作
-        self.backgroundColor = [UIColor colorWithRed:245.0/255.0
-                                               green:245.0/255.0
-                                                blue:245.0/255.0 alpha:1];
+//        self.backgroundColor = [UIColor colorWithRed:245.0/255.0
+//                                               green:245.0/255.0
+//                                                blue:245.0/255.0 alpha:1];
+        self.backgroundColor = [UIColor clearColor];
         self.maxSelectedSeatsCount = ZFMaxSelectedSeatsCount;
         self.actionBlock = actionBlock;
         [self initScrollView];
-        [self initappLogo];
+//        [self initappLogo];
         [self initSeatsView:seatsArray];
         [self initindicator:seatsArray];
         [self initRowIndexView:seatsArray];
-        [self initcenterLine:seatsArray];
+//        [self initcenterLine:seatsArray];
         [self inithallLogo:hallName];
         [self  startAnimation];//开场动画
     }
@@ -147,10 +146,10 @@
     ZFSeatsView *seatView = [[ZFSeatsView alloc]initWithSeatsArray:seatsArray
                                                      maxNomarWidth:self.width
                                                 seatBtnActionBlock:^(ZFSeatButton *seatBtn, NSMutableDictionary *allAvailableSeats) {
-        [weakSelf.indicator updateMiniImageView];
         NSString *errorStr = nil;
         if (seatBtn.selected) {
-            [weakSelf.selecetedSeats addObject:seatBtn];
+            if (![weakSelf.selecetedSeats containsObject:seatBtn])
+                [weakSelf.selecetedSeats addObject:seatBtn];
             if (weakSelf.selecetedSeats.count > weakSelf.maxSelectedSeatsCount) {
                 seatBtn.selected = !seatBtn.selected;
                 [weakSelf.selecetedSeats removeObject:seatBtn];
@@ -159,7 +158,9 @@
             } else {
                 weakSelf.actionBlock(seatBtn.seatsmodel.rowId, seatBtn.seatmodel.columnId, kSelect);
             }
+            [weakSelf.indicator updateMiniImageView];
         }else{
+            [weakSelf.indicator updateMiniImageView];
             if ([weakSelf.selecetedSeats containsObject:seatBtn]) {
                 [weakSelf.selecetedSeats removeObject:seatBtn];
                 if (weakSelf.actionBlock) weakSelf.actionBlock(seatBtn.seatsmodel.rowId, seatBtn.seatmodel.columnId, kUnSelect);
@@ -208,6 +209,17 @@
     self.indicator = indicator;
     [self addSubview:indicator];
     
+}
+
+- (void)setRow:(NSString *)row column:(NSString *)column selected:(BOOL)select {
+    [self.seatView setRow:row column:column selected:select];
+}
+
+- (void)clearAllSelectedSeats {
+    for (ZFSeatButton *seatBtn in self.selecetedSeats) {
+        seatBtn.selected = NO;
+    }
+    [self.selecetedSeats removeAllObjects];
 }
 
 #pragma mark - <UIScrollViewDelegate>

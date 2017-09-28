@@ -3,7 +3,8 @@ import {
     requireNativeComponent,
     findNodeHandle,
     NativeModules,
-    Platform
+    Platform,
+    View
 } from 'react-native';
 import PropTypes from 'prop-types';
 
@@ -29,8 +30,7 @@ class MovieSeats extends Component {
     }
 
     render() {
-        let seatInfos = {row:'1', seat:'2'}
-        return <RNMovieSeats {...this.props} onChange={this._onChange} seatInfos={seatInfos} />;
+        return <RNMovieSeats {...this.props} onChange={this._onChange} />;
     }
 
     componentDidMount() {
@@ -40,6 +40,7 @@ class MovieSeats extends Component {
 }
 
 MovieSeats.propTypes = {
+    ...View.propTypes,
     width: PropTypes.number,
     height: PropTypes.number,
     onChange: PropTypes.func,
@@ -49,6 +50,7 @@ MovieSeats.propTypes = {
     error: PropTypes.func,
     maxSelectedSeatsCount: PropTypes.number,
     selectedSeats: PropTypes.array,
+    hallName: PropTypes.string
     seatSpace:PropTypes.number,
     seatVerSpace:PropTypes.number,
 }
