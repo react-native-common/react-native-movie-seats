@@ -30,7 +30,7 @@ public class RNMovieSeatsManager extends SimpleViewManager<RNMovieSeats> {
     }
 
     @ReactProp(name = "seatInfos")
-    public void setData(RNMovieSeats RNMovieSeats, @Nullable ReadableMap data) {
+    public void setData(RNMovieSeats view, @Nullable ReadableMap data) {
         Type type = new TypeToken<RNMovieSeats.Seat[][]>() {
         }.getType();
         RNMovieSeats.Seat[][] seats;
@@ -39,7 +39,7 @@ public class RNMovieSeatsManager extends SimpleViewManager<RNMovieSeats> {
         } catch (Exception e) {
             return;
         }
-        RNMovieSeats.setData(seats);
+        view.setData(seats);
         ArrayList<String> rows;
         Type rType = new TypeToken<ArrayList<String>>() {
         }.getType();
@@ -48,11 +48,11 @@ public class RNMovieSeatsManager extends SimpleViewManager<RNMovieSeats> {
         } catch (Exception e) {
             return;
         }
-        RNMovieSeats.setLineNumbers(rows);
+        view.setLineNumbers(rows);
     }
 
     @ReactProp(name = "selectedSeats")
-    public void setValue(RNMovieSeats RNMovieSeats, @Nullable ReadableArray data) {
+    public void setValue(RNMovieSeats view, @Nullable ReadableArray data) {
         Type type = new TypeToken<RNMovieSeats.Seat[]>() {
         }.getType();
         RNMovieSeats.Seat[] seats;
@@ -61,12 +61,20 @@ public class RNMovieSeatsManager extends SimpleViewManager<RNMovieSeats> {
         } catch (Exception e) {
             return;
         }
-        RNMovieSeats.setselectSeats(seats);
+        view.setselectSeats(seats);
     }
 
     @ReactProp(name = "maxSelectedSeatsCount")
-    public void setMaxSelected(RNMovieSeats RNMovieSeats, int max) {
-        RNMovieSeats.setMaxSelected(max);
+    public void setMaxSelected(RNMovieSeats view, int max) {
+        view.setMaxSelected(max);
+    }
+    @ReactProp(name = "seatSpace")
+    public void setSpace(RNMovieSeats view,int space){
+        view.setSpacing(space);
     }
 
+    @ReactProp(name = "seatVerSpace")
+    public void setVerSpace(RNMovieSeats view,int verSpace){
+        view.setVerSpacing(verSpace);
+    }
 }

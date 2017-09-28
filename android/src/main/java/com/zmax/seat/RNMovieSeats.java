@@ -31,9 +31,14 @@ import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.uimanager.events.RCTEventEmitter;
 import com.google.gson.Gson;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
 
 import java.util.ArrayList;
 import java.util.Collections;
+
+import static com.nostra13.universalimageloader.core.ImageLoader.TAG;
 
 /**
  * Created by baoyunlong on 16/6/16.
@@ -48,6 +53,7 @@ public class RNMovieSeats extends View {
     private Paint dashPaint;
     private Seat[][] seats;
     private Path path;
+
 
     /**
      * 设置行号 默认显示 1,2,3....数字
@@ -70,12 +76,12 @@ public class RNMovieSeats extends View {
     /**
      * 座位水平间距
      */
-    int spacing;
+    int spacing =(int) dip2Px(5);
 
     /**
      * 座位垂直间距
      */
-    int verSpacing;
+    int verSpacing =(int) dip2Px(5);
 
     /**
      * 行号宽度
@@ -95,17 +101,17 @@ public class RNMovieSeats extends View {
     /**
      * 可选时座位的图片
      */
-    Bitmap seatBitmap;
+    Bitmap defaultBitmap;
 
     /**
      * 选中时座位的图片
      */
-    Bitmap checkedSeatBitmap;
+    Bitmap defaultcheckedBitmap;
 
     /**
      * 座位已经售出时的图片
      */
-    Bitmap seatSoldBitmap;
+    Bitmap defaultSoldBitmap;
 
     Bitmap overviewBitmap;
 
@@ -115,12 +121,12 @@ public class RNMovieSeats extends View {
     /**
      * 整个座位图的宽度
      */
-    int seatBitmapWidth;
+    int seatTableWidth;
 
     /**
      * 整个座位图的高度
      */
-    int seatBitmapHeight;
+    int seatTableHeight;
 
     /**
      * 标识是否需要绘制座位图
@@ -230,22 +236,22 @@ public class RNMovieSeats extends View {
     /**
      * 座位已售
      */
-    public static final int SEAT_TYPE_SOLD = 1;
+    private static final int SEAT_TYPE_SOLD = 1;
 
     /**
      * 座位已经选中
      */
-    public static final int SEAT_TYPE_SELECTED = 2;
+    private static final int SEAT_TYPE_SELECTED = 2;
 
     /**
      * 座位可选
      */
-    public static final int SEAT_TYPE_AVAILABLE = 3;
+    private static final int SEAT_TYPE_AVAILABLE = 3;
 
     /**
      * 座位不可用
      */
-    public static final int SEAT_TYPE_NOT_AVAILABLE = 4;
+    private static final int SEAT_TYPE_NOT_AVAILABLE = 4;
 
     private int downX, downY;
     private boolean pointer;
@@ -284,16 +290,21 @@ public class RNMovieSeats extends View {
      */
     private int seatHeight;
 
+    private ImageLoader imgLoader;
+
     public RNMovieSeats(Context context) {
         this(context, null);
     }
 
     public RNMovieSeats(Context context, AttributeSet attrs) {
         super(context, attrs);
-        init(context, attrs);
+        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(context).threadPoolSize(20).build();
+        ImageLoader.getInstance().init(config);
+        imgLoader = ImageLoader.getInstance();
+        getAttrs(context, attrs);
     }
 
-    private void init(Context context, AttributeSet attrs) {
+    private void getAttrs(Context context, AttributeSet attrs) {
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.SeatTableView);
         overview_checked = typedArray.getColor(R.styleable.SeatTableView_overview_checked, Color.parseColor("#5A9E64"));
         overview_sold = typedArray.getColor(R.styleable.SeatTableView_overview_sold, Color.RED);
@@ -306,7 +317,7 @@ public class RNMovieSeats extends View {
 
     public RNMovieSeats(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        init(context, attrs);
+        getAttrs(context, attrs);
     }
 
 
@@ -314,29 +325,23 @@ public class RNMovieSeats extends View {
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }
-
+    @Deprecated
     float xScale1 = 1;
+    @Deprecated
     float yScale1 = 1;
 
     private void init() {
-        spacing = verSpacing = (int) dip2Px(5);
+//        spacing = verSpacing = (int) dip2Px(5);
         defaultScreenWidth = (int) dip2Px(80);
         defaultImgW = defaultImgH = dip2Px(20);
-        seatBitmap = BitmapFactory.decodeResource(getResources(), seatAvailableResID);
+        defaultBitmap = BitmapFactory.decodeResource(getResources(), seatAvailableResID);
+        defaultcheckedBitmap = BitmapFactory.decodeResource(getResources(), seatCheckedResID);
+        defaultSoldBitmap = BitmapFactory.decodeResource(getResources(), seatSoldResID);
 
-        float scaleX = defaultImgW / seatBitmap.getWidth();
-        float scaleY = defaultImgH / seatBitmap.getHeight();
-        xScale1 = scaleX;
-        yScale1 = scaleY;
-
-        seatHeight = (int) (seatBitmap.getHeight() * yScale1);
-        seatWidth = (int) (seatBitmap.getWidth() * xScale1);
-
-        checkedSeatBitmap = BitmapFactory.decodeResource(getResources(), seatCheckedResID);
-        seatSoldBitmap = BitmapFactory.decodeResource(getResources(), seatSoldResID);
-
-        seatBitmapWidth = (int) (column * seatBitmap.getWidth() * xScale1 + (column - 1) * spacing);
-        seatBitmapHeight = (int) (row * seatBitmap.getHeight() * yScale1 + (row - 1) * verSpacing);
+        seatHeight = (int) (defaultImgH * yScale1);
+        seatWidth = (int) (defaultImgW * xScale1);
+        seatTableWidth = (int) (column * defaultImgW * xScale1 + (column - 1) * spacing);
+        seatTableHeight = (int) (row * defaultImgH * yScale1 + (row - 1) * verSpacing);
         paint.setColor(Color.RED);
         numberWidth = (int) dip2Px(20);
 
@@ -384,7 +389,7 @@ public class RNMovieSeats extends View {
                 lineNumbers.add((i + 1) + "");
             }
         }
-//        matrix.postTranslate((getMeasuredWidth()-seatBitmapWidth)/2, headHeight + screenHeight + borderHeight + verSpacing);
+//        matrix.postTranslate((getMeasuredWidth()-seatTableWidth)/2, headHeight + screenHeight + borderHeight + verSpacing);
         dashPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         dashPaint.setPathEffect(new DashPathEffect(new float[]{dip2Px(3), dip2Px(3)}, 0));
         dashPaint.setColor(Color.parseColor("#fba148"));
@@ -400,7 +405,7 @@ public class RNMovieSeats extends View {
             return;
         }
         if (isFirstDraw) {
-            matrix.postTranslate((getWidth() - seatBitmapWidth) / 2, 0);
+            matrix.postTranslate((getWidth() - seatTableWidth) / 2, 0);
             isFirstDraw = false;
         }
         drawDash(canvas);
@@ -487,9 +492,9 @@ public class RNMovieSeats extends View {
         int txtWidth = (int) headPaint.measureText(txt);
         float spacing = dip2Px(10);
         float spacing1 = dip2Px(5);
-        float y = (headHeight - seatBitmap.getHeight()) / 2;
+        float y = (headHeight - defaultBitmap.getHeight()) / 2;
 
-        float width = seatBitmap.getWidth() + spacing1 + txtWidth + spacing + seatSoldBitmap.getWidth() + txtWidth + spacing1 + spacing + checkedSeatBitmap.getHeight() + spacing1 + txtWidth;
+        float width = defaultImgW + spacing1 + txtWidth + spacing + defaultSoldBitmap.getWidth() + txtWidth + spacing1 + spacing + defaultcheckedBitmap.getHeight() + spacing1 + txtWidth;
         Bitmap bitmap = Bitmap.createBitmap(getWidth(), (int) headHeight, Bitmap.Config.ARGB_8888);
 
         Canvas canvas = new Canvas(bitmap);
@@ -501,19 +506,19 @@ public class RNMovieSeats extends View {
         float startX = (getWidth() - width) / 2;
         tempMatrix.setScale(xScale1, yScale1);
         tempMatrix.postTranslate(startX, (headHeight - seatHeight) / 2);
-        canvas.drawBitmap(seatBitmap, tempMatrix, headPaint);
+        canvas.drawBitmap(defaultBitmap, tempMatrix, headPaint);
         canvas.drawText("可选", startX + seatWidth + spacing1, txtY, headPaint);
 
-        float soldSeatBitmapY = startX + seatBitmap.getWidth() + spacing1 + txtWidth + spacing;
+        float soldSeatBitmapY = startX + defaultImgW + spacing1 + txtWidth + spacing;
         tempMatrix.setScale(xScale1, yScale1);
         tempMatrix.postTranslate(soldSeatBitmapY, (headHeight - seatHeight) / 2);
-        canvas.drawBitmap(seatSoldBitmap, tempMatrix, headPaint);
+        canvas.drawBitmap(defaultSoldBitmap, tempMatrix, headPaint);
         canvas.drawText("已售", soldSeatBitmapY + seatWidth + spacing1, txtY, headPaint);
 
-        float checkedSeatBitmapX = soldSeatBitmapY + seatSoldBitmap.getWidth() + spacing1 + txtWidth + spacing;
+        float checkedSeatBitmapX = soldSeatBitmapY + defaultSoldBitmap.getWidth() + spacing1 + txtWidth + spacing;
         tempMatrix.setScale(xScale1, yScale1);
         tempMatrix.postTranslate(checkedSeatBitmapX, y);
-        canvas.drawBitmap(checkedSeatBitmap, tempMatrix, headPaint);
+        canvas.drawBitmap(defaultcheckedBitmap, tempMatrix, headPaint);
         canvas.drawText("已选", checkedSeatBitmapX + spacing1 + seatWidth, txtY, headPaint);
 
         //绘制分割线
@@ -532,8 +537,8 @@ public class RNMovieSeats extends View {
         pathPaint.setColor(Color.parseColor("#e2e2e2"));
         float startY = headHeight + borderHeight;
 
-        float centerX = seatBitmapWidth * getMatrixScaleX() / 2 + getTranslateX();
-        float screenWidth = seatBitmapWidth * screenWidthScale * getMatrixScaleX();
+        float centerX = seatTableWidth * getMatrixScaleX() / 2 + getTranslateX();
+        float screenWidth = seatTableWidth * screenWidthScale * getMatrixScaleX();
         if (screenWidth < defaultScreenWidth) {
             screenWidth = defaultScreenWidth;
         }
@@ -555,6 +560,20 @@ public class RNMovieSeats extends View {
 
     Matrix tempMatrix = new Matrix();
 
+    public void setVerSpacing(int verSpacing) {
+        this.verSpacing = (int) dip2Px(verSpacing);
+        seatTableHeight = (int) (row * defaultImgH * yScale1 + (row - 1) * verSpacing);
+        overviewVerSpacing = verSpacing / overviewScale;
+        invalidate();
+    }
+
+    public void setSpacing(int spacing) {
+        this.spacing = (int) dip2Px(spacing);
+        seatTableWidth = (int) (column * defaultImgW * xScale1 + (column - 1) * spacing);
+        overviewSpacing = spacing / overviewScale;
+        invalidate();
+    }
+
     void drawSeat(Canvas canvas) {
         zoom = getMatrixScaleX();
         float translateX = getTranslateX();
@@ -562,34 +581,52 @@ public class RNMovieSeats extends View {
         float scaleX = zoom;
         float scaleY = zoom;
         for (int i = 0; i < row; i++) {
-            float top = i * seatBitmap.getHeight() * yScale1 * scaleY + i * verSpacing * scaleY + translateY;
-            float bottom = top + seatBitmap.getHeight() * yScale1 * scaleY;
+            float top = i * defaultImgH * yScale1 * scaleY + i * verSpacing * scaleY + translateY;
+            float bottom = top + defaultImgH * yScale1 * scaleY;
             if (bottom < 0 || top > getHeight()) {
                 continue;
             }
             for (int j = 0; j < column; j++) {
-                float left = j * seatBitmap.getWidth() * xScale1 * scaleX + j * spacing * scaleX + translateX;
+                float left = j * defaultImgW * xScale1 * scaleX + j * spacing * scaleX + translateX;
 
-                float right = (left + seatBitmap.getWidth() * xScale1 * scaleY);
+                float right = (left + defaultImgW * xScale1 * scaleY);
                 if (right < 0 || left > getWidth()) {
                     continue;
                 }
                 int seatType = getSeatType(i, j);
                 tempMatrix.setTranslate(left, top);
-                tempMatrix.postScale(xScale1, yScale1, left, top);
                 tempMatrix.postScale(scaleX, scaleY, left, top);
+                Seat seat = seats[i][j];
                 switch (seatType) {
                     case SEAT_TYPE_AVAILABLE:
-                        canvas.drawBitmap(seatBitmap, tempMatrix, paint);
+                        if (seat.defaultBitmap == null) {
+                            tempMatrix.postScale(defaultImgW/defaultBitmap.getWidth(), defaultImgH/defaultBitmap.getHeight(), left, top);
+                            canvas.drawBitmap(defaultBitmap, tempMatrix, paint);
+                        } else {
+                            tempMatrix.postScale(defaultImgW/seat.defaultBitmap.getWidth(), defaultImgH/seat.defaultBitmap.getHeight(), left, top);
+                            canvas.drawBitmap(seat.defaultBitmap, tempMatrix, paint);
+                        }
                         break;
                     case SEAT_TYPE_NOT_AVAILABLE:
                         break;
                     case SEAT_TYPE_SELECTED:
-                        canvas.drawBitmap(checkedSeatBitmap, tempMatrix, paint);
+                        if (seat.checkedBitmap == null) {
+                            tempMatrix.postScale(defaultImgW/defaultcheckedBitmap.getWidth(), defaultImgH/defaultcheckedBitmap.getHeight(), left, top);
+                            canvas.drawBitmap(defaultcheckedBitmap, tempMatrix, paint);
+                        } else {
+                            tempMatrix.postScale(defaultImgW/seat.checkedBitmap.getWidth(), defaultImgH/seat.checkedBitmap.getHeight(), left, top);
+                            canvas.drawBitmap(seat.checkedBitmap, tempMatrix, paint);
+                        }
                         drawText(canvas, i, j, top, left);
                         break;
                     case SEAT_TYPE_SOLD:
-                        canvas.drawBitmap(seatSoldBitmap, tempMatrix, paint);
+                        if (seat.soldBitmap == null) {
+                            tempMatrix.postScale(defaultImgW/defaultSoldBitmap.getWidth(), defaultImgH/defaultSoldBitmap.getHeight(), left, top);
+                            canvas.drawBitmap(defaultSoldBitmap, tempMatrix, paint);
+                        } else {
+                            tempMatrix.postScale(defaultImgW/seat.soldBitmap.getWidth(), defaultImgH/seat.soldBitmap.getHeight(), left, top);
+                            canvas.drawBitmap(seat.soldBitmap, tempMatrix, paint);
+                        }
                         break;
                 }
 
@@ -598,15 +635,15 @@ public class RNMovieSeats extends View {
     }
 
     private void drawDash(Canvas canvas) {
-        float centerX = seatBitmapWidth * getMatrixScaleX() / 2 + getTranslateX();
-        float centerY = seatBitmapHeight * getMatrixScaleY() / 2 + getTranslateY();
+        float centerX = seatTableWidth * getMatrixScaleX() / 2 + getTranslateX();
+        float centerY = seatTableHeight * getMatrixScaleY() / 2 + getTranslateY();
         float startY = getTranslateY();
         path.reset();
         path.moveTo(centerX, startY);
-        path.lineTo(centerX, seatBitmapHeight * getMatrixScaleY() + getTranslateY());
+        path.lineTo(centerX, seatTableHeight * getMatrixScaleY() + getTranslateY());
         canvas.drawPath(path, dashPaint);
         path.moveTo(getTranslateX(), centerY);
-        path.lineTo(seatBitmapWidth * getMatrixScaleY() + getTranslateX(), centerY);
+        path.lineTo(seatTableWidth * getMatrixScaleY() + getTranslateX(), centerY);
         canvas.drawPath(path, dashPaint);
     }
 
@@ -628,7 +665,7 @@ public class RNMovieSeats extends View {
     }
 
     private int getID(int row, int column) {
-        return row * 10 + (column + 1);
+        return row * this.column + (column + 1);
     }
 
     /**
@@ -690,7 +727,7 @@ public class RNMovieSeats extends View {
         int translateY = (int) getTranslateY();
         float scaleY = getMatrixScaleY();
         rectF.top = translateY - lineNumberTxtHeight / 2;
-        rectF.bottom = translateY + (seatBitmapHeight * scaleY) + lineNumberTxtHeight / 2;
+        rectF.bottom = translateY + (seatTableHeight * scaleY) + lineNumberTxtHeight / 2;
         rectF.left = 0;
         rectF.right = numberWidth;
         canvas.drawRoundRect(rectF, numberWidth / 2, numberWidth / 2, lineNumberPaint);
@@ -793,8 +830,8 @@ public class RNMovieSeats extends View {
      * 往上滑动,回弹到底部,往下滑动回弹到顶部
      */
     private void autoScroll() {
-        float currentSeatBitmapWidth = seatBitmapWidth * getMatrixScaleX();
-        float currentSeatBitmapHeight = seatBitmapHeight * getMatrixScaleY();
+        float currentSeatBitmapWidth = seatTableWidth * getMatrixScaleX();
+        float currentSeatBitmapHeight = seatTableHeight * getMatrixScaleY();
         float moveYLength = 0;
         float moveXLength = 0;
 
@@ -990,6 +1027,10 @@ public class RNMovieSeats extends View {
         public void onAnimationUpdate(ValueAnimator animation) {
             zoom = (Float) animation.getAnimatedValue();
             zoom(zoom);
+
+            if (DBG) {
+                Log.d("zoomTest", "zoom:" + zoom);
+            }
         }
 
         @Override
@@ -1011,7 +1052,7 @@ public class RNMovieSeats extends View {
     }
 
 
-    private void setRank(int row, int column) {
+    public void setRank(int row, int column) {
         this.row = row;
         this.column = column;
         init();
@@ -1019,20 +1060,22 @@ public class RNMovieSeats extends View {
     }
 
     public static class Seat {
-        int type;
         int row;
         int col;
-        String defaultImg;
-        String checkedImg;
-        String soldImg;
-        String name;
+        int type;
+        public String defaultImgUrl;
+        public String checkedImgUrl;
+        public String soldImgUrl;
+        Bitmap defaultBitmap;
+        Bitmap checkedBitmap;
+        Bitmap soldBitmap;
 
         public Seat(int type) {
             this.type = type;
         }
     }
 
-    public void setData(final Seat[][] seats) {
+    public void setData(Seat[][] seats) {
         this.seats = seats;
         setSeatChecker(new SeatChecker() {
             @Override
@@ -1047,26 +1090,24 @@ public class RNMovieSeats extends View {
 
             @Override
             public String[] checkedSeatTxt(int row, int column) {
-               String rowTxt = RNMovieSeats.this.seats[row][column].row+"排";
-               String colTxt = RNMovieSeats.this.seats[row][column].col+"座";
+                String rowTxt = RNMovieSeats.this.seats[row][column].row+"排";
+                String colTxt = RNMovieSeats.this.seats[row][column].col+"座";
                 return new String[]{rowTxt,colTxt};
             }
             @Override
             public void checked(int row, int column) {
-                postEvent2JS("select", new Gson().toJson(seats[row][column]));
+                postEvent2JS("select", new Gson().toJson(RNMovieSeats.this.seats[row][column]));
             }
 
 
             @Override
             public void unCheck(int row, int column) {
-                postEvent2JS("unselect", new Gson().toJson(seats[row][column]));
+                postEvent2JS("unselect", new Gson().toJson(RNMovieSeats.this.seats[row][column]));
             }
-
-
         });
+        getSeatsRemoteImg();
         setRank(seats.length, seats[0] != null ? seats[0].length : 0);
     }
-
     private void postEvent2JS(String type, String message) {
         WritableMap event = Arguments.createMap();
         event.putString("message", new Gson().toJson(new EventMessage(type, message)));
@@ -1084,6 +1125,82 @@ public class RNMovieSeats extends View {
         public EventMessage(String type, String message) {
             this.type = type;
             this.data = message;
+        }
+    }
+
+    /**
+     * 将下载完成的图片添加到对应的座位数据中
+     * @param imageUri
+     * @param LoadedImg
+     */
+    private void addImg2SeatData(String imageUri,Bitmap LoadedImg){
+        for (int i = 0; i < seats.length; i++) {
+            for (int j = 0; j < seats[i].length; j++) {
+                final Seat seat = seats[i][j];
+                if(imageUri.equals(seat.defaultImgUrl)){
+                    seat.defaultBitmap =LoadedImg;
+                }
+                if(imageUri.equals(seat.checkedImgUrl)){
+                    seat.checkedBitmap =LoadedImg;
+                }
+                if(imageUri.equals(seat.soldImgUrl)){
+                    seat.soldBitmap =LoadedImg;
+                }
+            }
+        }
+
+    }
+
+    /**
+     * 下载图片的任务数量
+     */
+    int imgTaskCount;
+    /**
+     * 结束的任务数量
+     */
+    int finishImgCount;
+
+    /**
+     * 下载任务全部结束后刷新视图
+     */
+    private void endImgTasks() {
+        finishImgCount++;
+        Log.e(TAG, "finishImgCount: "+finishImgCount+" imgTaskCount: "+imgTaskCount);
+        if(finishImgCount>=imgTaskCount){
+            invalidate();
+        }
+    }
+
+    /**
+     * 图片下载监听
+     */
+    private SimpleImageLoadingListener imageLoadingListener = new SimpleImageLoadingListener() {
+        @Override
+        public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
+            addImg2SeatData(imageUri, loadedImage);
+            invalidate();
+        }
+    };
+
+    private void getSeatsRemoteImg() {
+        imgTaskCount =0;
+        finishImgCount =0;
+        for (int i = 0; i < seats.length; i++) {
+            for (int j = 0; j < seats[i].length; j++) {
+                Seat seat = seats[i][j];
+                if (seat.defaultImgUrl != null) {
+                    imgTaskCount ++;
+                    imgLoader.loadImage(seat.defaultImgUrl, imageLoadingListener);
+                }
+                if (seat.checkedImgUrl != null) {
+                    imgTaskCount ++;
+                    imgLoader.loadImage(seat.checkedImgUrl, imageLoadingListener);
+                }
+                if (seat.soldImgUrl != null) {
+                    imgTaskCount ++;
+                    imgLoader.loadImage(seat.soldImgUrl, imageLoadingListener);
+                }
+            }
         }
     }
 
@@ -1124,21 +1241,12 @@ public class RNMovieSeats extends View {
     GestureDetector gestureDetector = new GestureDetector(getContext(), new GestureDetector.SimpleOnGestureListener() {
         @Override
         public boolean onSingleTapConfirmed(MotionEvent e) {
-            return clickSeat(e);
-        }
-
-        @Override
-        public boolean onDoubleTap(MotionEvent e) {
-            return clickSeat(e);
-        }
-
-        private boolean clickSeat(MotionEvent e) {
             isOnClick = true;
             int x = (int) e.getX();
             int y = (int) e.getY();
             int j = (int) (((x - getTranslateX()) / getMatrixScaleX()) / (seatWidth + spacing));
             int i = (int) (((y - getTranslateY()) / getMatrixScaleY()) / (seatHeight + verSpacing));
-            if (i < 0 || i >= seats.length || j < 0 || j >= seats[0].length) {
+            if (i < 0 || i > seats.length || j < 0 || j > seats[0].length) {
                 return super.onSingleTapConfirmed(e);
             }
             if (seatChecker != null && seatChecker.isValidSeat(i, j) && !seatChecker.isSold(i, j)) {
@@ -1151,7 +1259,7 @@ public class RNMovieSeats extends View {
                     }
                 } else {
                     if (selects.size() >= maxSelected) {
-                        postEvent2JS("error", "max select :" + maxSelected);
+                        postEvent2JS("error","beyond max select:"+selects.size());
                         return super.onSingleTapConfirmed(e);
                     } else {
                         addChooseSeat(i, j);
@@ -1185,8 +1293,6 @@ public class RNMovieSeats extends View {
 
     private void addChooseSeat(int row, int column) {
         int id = getID(row, column);
-        /*if (Collections.binarySearch(selects, id) >= 0)
-            return;*/
         for (int i = 0; i < selects.size(); i++) {
             int item = selects.get(i);
             if (id < item) {
@@ -1237,6 +1343,10 @@ public class RNMovieSeats extends View {
 
     public void setMaxSelected(int maxSelected) {
         this.maxSelected = maxSelected;
+    }
+
+    public void setselectSeats(){
+
     }
 
     public void setSeatChecker(SeatChecker seatChecker) {

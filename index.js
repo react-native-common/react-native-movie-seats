@@ -16,8 +16,12 @@ class MovieSeats extends Component {
 
     _onChange(event: Event) {
         let eventMessage = {};
-        eventMessage = event.nativeEvent;
-        console.log(eventMessage);
+        try{
+            eventMessage =JSON.parse(event.nativeEvent.message)
+            eventMessage.data = JSON.parse(eventMessage.data)
+        }catch (e){
+
+        }
         if(this.props[eventMessage.type])
         {
             this.props[eventMessage.type](eventMessage.data);
@@ -45,6 +49,8 @@ MovieSeats.propTypes = {
     error: PropTypes.func,
     maxSelectedSeatsCount: PropTypes.number,
     selectedSeats: PropTypes.array,
+    seatSpace:PropTypes.number,
+    seatVerSpace:PropTypes.number,
 }
 
 MovieSeats.defaultProps = {
