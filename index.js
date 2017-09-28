@@ -50,7 +50,7 @@ MovieSeats.propTypes = {
     error: PropTypes.func,
     maxSelectedSeatsCount: PropTypes.number,
     selectedSeats: PropTypes.array,
-    hallName: PropTypes.string
+    hallName: PropTypes.string,
     seatSpace:PropTypes.number,
     seatVerSpace:PropTypes.number,
 }
