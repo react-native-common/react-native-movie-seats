@@ -14,6 +14,11 @@
 - (void)setupView {
     if(!_selectSeatsView && self.seatsArray.count > 0) {
         __weak typeof(self) weakSelf = self;
+        CGRect frame = [UIScreen mainScreen].bounds;
+        if (self.rctWidth == 0 || self.rctHeight == 0) {
+            self.rctWidth = frame.size.width;
+            self.rctHeight = self.rctWidth * 0.8;
+        }
         _selectSeatsView = [[ZFSeatSelectionView alloc] initWithFrame:CGRectMake(0, 0, self.rctWidth, self.rctHeight) SeatsArray:self.seatsArray HallName:self.hallName seatBtnActionBlock:^(NSString *row, NSString *column, ActionType actionType) {
             NSDictionary *types = @{
                                     @(kSelect).stringValue: @"select",
@@ -31,7 +36,8 @@
                                     });
             }
         }];
-        _selectSeatsView.maxSelectedSeatsCount = self.maxSelectedSeatsCount;
+        if (self.maxSelectedSeatsCount > 0)
+            _selectSeatsView.maxSelectedSeatsCount = self.maxSelectedSeatsCount;
         [self addSubview:_selectSeatsView];
         /** 重新设置下选中座位，因为之前selctSeatsView还没创建 */
         [self setSelectedSeats:self.selectedSeats];
@@ -63,4 +69,4 @@
 }
 
 @end
-  
+

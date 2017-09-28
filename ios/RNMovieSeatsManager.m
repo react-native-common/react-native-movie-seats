@@ -30,13 +30,13 @@ RCT_CUSTOM_VIEW_PROPERTY(seatInfos, NSDictionary, RNMovieSeats) {
         NSMutableArray *seatsArray = @[].mutableCopy;
         for (int i = 0; i < seats.count; i++) {
             ZFSeatsModel *seatsModel = [[ZFSeatsModel alloc] init];
-            seatsModel.rowId = rows[i];
+            seatsModel.rowId = [rows[i] stringValue];
             seatsModel.rowNum = @(i + 1);
             NSMutableArray *columns = @[].mutableCopy;
             for (NSDictionary *seatDict in seats[i]) {
                 ZFSeatModel *seatModel = [ZFSeatModel new];
-                seatModel.st = [seatDict objectForKey:@"seatType"];
-                seatModel.columnId = [seatDict objectForKey:@"column"];
+                seatModel.st = @[@"E", @"LK", @"N"][[[seatDict objectForKey:@"type"] integerValue]-1];
+                seatModel.columnId = [[seatDict objectForKey:@"col"] stringValue];
                 seatModel.seatNo = [NSString stringWithFormat:@"%@_%@", seatsModel.rowId, seatModel.columnId];
                 [columns addObject:seatModel];
             }
