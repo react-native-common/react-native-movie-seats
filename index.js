@@ -21,7 +21,7 @@ class MovieSeats extends Component {
             eventMessage =JSON.parse(event.nativeEvent.message)
             eventMessage.data = JSON.parse(eventMessage.data)
         }catch (e){
-
+            eventMessage=event.nativeEvent.message
         }
         if(this.props[eventMessage.type])
         {
