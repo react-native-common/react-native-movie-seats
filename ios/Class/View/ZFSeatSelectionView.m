@@ -145,7 +145,7 @@
    __weak typeof(self) weakSelf = self;
     ZFSeatsView *seatView = [[ZFSeatsView alloc]initWithSeatsArray:seatsArray
                                                      maxNomarWidth:self.width
-                                                seatBtnActionBlock:^(ZFSeatButton *seatBtn, NSMutableDictionary *allAvailableSeats) {
+                                                seatBtnActionBlock:^(ZFSeatButton *seatBtn, NSMutableDictionary *allAvailableSeats, BOOL touched) {
         NSString *errorStr = nil;
         if (seatBtn.selected) {
             if (![weakSelf.selecetedSeats containsObject:seatBtn])
@@ -154,16 +154,18 @@
                 seatBtn.selected = !seatBtn.selected;
                 [weakSelf.selecetedSeats removeObject:seatBtn];
                 errorStr = ZFExceededMaximumError;
-                weakSelf.actionBlock(seatBtn.seatsmodel.rowId, seatBtn.seatmodel.columnId, kError);
+                if (weakSelf.actionBlock && touched)
+                    weakSelf.actionBlock(seatBtn.seatsmodel.rowId, seatBtn.seatmodel.columnId, kError);
             } else {
-                weakSelf.actionBlock(seatBtn.seatsmodel.rowId, seatBtn.seatmodel.columnId, kSelect);
+                if (weakSelf.actionBlock && touched)
+                    weakSelf.actionBlock(seatBtn.seatsmodel.rowId, seatBtn.seatmodel.columnId, kSelect);
             }
             [weakSelf.indicator updateMiniImageView];
         }else{
             [weakSelf.indicator updateMiniImageView];
             if ([weakSelf.selecetedSeats containsObject:seatBtn]) {
                 [weakSelf.selecetedSeats removeObject:seatBtn];
-                if (weakSelf.actionBlock) weakSelf.actionBlock(seatBtn.seatsmodel.rowId, seatBtn.seatmodel.columnId, kUnSelect);
+                if (weakSelf.actionBlock && touched) weakSelf.actionBlock(seatBtn.seatsmodel.rowId, seatBtn.seatmodel.columnId, kUnSelect);
                 return ;
             }
         }

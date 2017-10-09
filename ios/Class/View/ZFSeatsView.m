@@ -16,7 +16,7 @@
 
 @interface ZFSeatsView ()
 
-@property (nonatomic,copy) void (^actionBlock)(ZFSeatButton *seatBtn,NSMutableDictionary *allAvailableSeats);
+@property (nonatomic,copy) void (^actionBlock)(ZFSeatButton *seatBtn,NSMutableDictionary *allAvailableSeats, BOOL touched);
 
 @property (nonatomic,strong) NSMutableDictionary *allAvailableSeats;//所有可选的座位
 
@@ -33,7 +33,7 @@
 
 -(instancetype)initWithSeatsArray:(NSMutableArray *)seatsArray
                     maxNomarWidth:(CGFloat)maxW
-               seatBtnActionBlock:(void (^)(ZFSeatButton *, NSMutableDictionary *))actionBlock{
+               seatBtnActionBlock:(void (^)(ZFSeatButton *, NSMutableDictionary *, BOOL))actionBlock{
     
     if (self = [super init]) {
         
@@ -139,7 +139,7 @@
     }else{
         seatbtn.seatmodel.st = @"N";//设置为可选
     }
-   if (self.actionBlock) self.actionBlock(seatbtn,self.allAvailableSeats);
+   if (self.actionBlock) self.actionBlock(seatbtn,self.allAvailableSeats, YES);
 }
 
 - (void)cancelSelectAtRow:(NSString *)row column:(NSString *)column {
@@ -156,7 +156,7 @@
             } else {
                 seatBtn.seatmodel.st = @"N";
             }
-            if (self.actionBlock) self.actionBlock(seatBtn, self.allAvailableSeats);
+            if (self.actionBlock) self.actionBlock(seatBtn, self.allAvailableSeats, NO);
             break;
         }
     }

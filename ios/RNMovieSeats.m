@@ -32,7 +32,7 @@
             if (weakSelf.onChange) {
                 weakSelf.onChange(@{
                                     @"type": type,
-                                    @"data": @{@"row":row, @"column":column}
+                                    @"data": @{@"row":@(row.integerValue), @"col":@(column.integerValue)}
                                     });
             }
         }];
@@ -48,8 +48,8 @@
     _selectedSeats = selectedSeats;
     [self.selectSeatsView clearAllSelectedSeats];
     for (NSDictionary *seat in selectedSeats) {
-        NSString *row = [seat objectForKey:@"row"];
-        NSString *column = [seat objectForKey:@"column"];
+        NSString *row = [[seat objectForKey:@"row"] stringValue];
+        NSString *column = [[seat objectForKey:@"col"] stringValue];
         [self.selectSeatsView setRow:row column:column selected:YES];
     }
 }
