@@ -222,6 +222,7 @@
         seatBtn.selected = NO;
     }
     [self.selecetedSeats removeAllObjects];
+    [self.indicator updateMiniImageView];
 }
 
 #pragma mark - <UIScrollViewDelegate>
